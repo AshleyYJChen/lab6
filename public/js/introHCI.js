@@ -12,6 +12,7 @@ function initializePage() {
 	$('.project a').click(addProjectDetails);
 
 	// $('#colorBtn').click(randomizeColors);
+
 }
 
 /*
@@ -27,4 +28,29 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+
+
+	var endpoint = "/project/".concat(idNumber);
+	console.log(endpoint);
+	
+	$.get(endpoint, callback);
+	
+
 }
+
+function callback(result){
+	
+//console.log(result);
+var projectID = result.id;
+var projectElem = "#project".concat(projectID ," .thumbnail .details"); //** 
+
+var htmlString = '<img src="' + result['image'] + '" class="detailsImage">' +'<p>' + result['title'] + '</p>'+'<p>'+ result['date'] + '</p>' + 
+result['summary'];
+$(projectElem).html(htmlString);
+
+
+
+
+	
+}
+
